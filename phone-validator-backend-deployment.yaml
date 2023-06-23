@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phone-validator-backend
+  namespace: phone-validator-backend
+  creationTimestamp: null
+  labels:
+    app: phone-validator-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: phone-validator-backend
+  strategy: 
+      type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: phone-validator-backend
+    spec:
+      containers:
+      - image: johnylima/phone-validator-backend
+        name: phone-validator-backend
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+        ports:
+        - containerPort: 6379
+        env:
+        - name: phone-validator
+
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lb-phone-validator-backend
+  labels:
+    app: lb-phone-validator-backend
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 6379
+  selector:
+    app: phone-validator-backend
+

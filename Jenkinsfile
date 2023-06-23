@@ -13,12 +13,12 @@ node {
                         sh "git config user.email johny.limasp@gmail.com"
                         sh "git config user.name Johny Lima"
                         //sh "git switch master"
-                        sh "cat deployment.yaml"
-                        sh "sed -i 's+johnylima/phone-validator-frontend.*+johnylima/phone-validator-frontend:${DOCKERTAG}+g' deployment.yaml"
-                        sh "cat deployment.yaml"
+                        sh "cat phone-validator-backend-deployment.yaml"
+                        sh "sed -i 's+johnylima/phone-validator-backend.*+johnylima/phone-validator-backend:${DOCKERTAG}+g' phone-validator-backend-deployment.yaml"
+                        sh "cat phone-validator-backend-deployment.yaml"
                         sh "git add ."
                         sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
-                        sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/GitOps-Manifest.git HEAD:main"
+                        sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/GitOps-Manifest-2.git HEAD:gitops/phone-validator-backend"
       }
     }
   }
