@@ -18,7 +18,7 @@ spec:
         app: phone-validator-frontend
     spec:
       containers:
-      - image: johnylima/phone-validator-frontend:8
+      - image: johnylima/phone-validator-frontend:9
         name: phone-validator-frontend
         resources: {}
 status: {}
