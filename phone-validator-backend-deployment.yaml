@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: phone-validator-backend
-  creationTimestamp: null
   labels:
     app: phone-validator-backend
 spec:
@@ -14,7 +13,6 @@ spec:
       type: RollingUpdate
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: phone-validator-backend
     spec:
@@ -40,7 +38,7 @@ kind: Service
 metadata:
   name: lb-phone-validator-backend
   labels:
-    app: lb-phone-validator-backend
+    app: phone-validator-backend
 spec:
   type: LoadBalancer
   ports:
