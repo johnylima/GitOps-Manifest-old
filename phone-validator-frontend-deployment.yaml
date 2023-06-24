@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: phone-validator-frontend
-  namespace: phone-validator-frontend
   creationTimestamp: null
   labels:
     app: phone-validator-frontend
@@ -20,7 +19,7 @@ spec:
         app: phone-validator-frontend
     spec:
       containers:
-      - image: johnylima/phone-validator-frontend
+      - image: johnylima/phone-validator-frontend:11
         name: phone-validator-frontend
         resources:
           requests:
@@ -30,10 +29,9 @@ spec:
             cpu: 250m
             memory: 256Mi
         ports:
-        - containerPort: 80
-        env:
-        - name: phone-validator
-          value: "phone-validator-backend"
+            - name: frontend-port
+              containerPort: 8081
+              hostPort: 8081
 
 status: {}
 ---
@@ -47,6 +45,6 @@ spec:
   type: LoadBalancer
   ports:
   - port: 80
-    targetPort: 5000
+    targetPort: 8081
   selector:
     app: phone-validator-frontend
