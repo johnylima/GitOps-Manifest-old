@@ -10,14 +10,17 @@ spec:
     matchLabels:
       app: phone-validator-frontend
   strategy: 
-    type: RollingUpdate
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 0
+        maxUnavailable: 50%
   template:
     metadata:
       labels:
         app: phone-validator-frontend
     spec:
       containers:
-      - image: johnylima/phone-validator-frontend:11
+      - image: johnylima/phone-validator-frontend-2:5
         name: phone-validator-frontend
         resources:
           requests:
