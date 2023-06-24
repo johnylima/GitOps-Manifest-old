@@ -11,13 +11,16 @@ spec:
       app: phone-validator-backend
   strategy: 
       type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 0
+        maxUnavailable: 50%
   template:
     metadata:
       labels:
         app: phone-validator-backend
     spec:
       containers:
-      - image: johnylima/phone-validator-backend:3
+      - image: johnylima/phone-validator-backend-2:6
         name: phone-validator-backend
         resources:
           requests:
@@ -46,4 +49,3 @@ spec:
     targetPort: 8080
   selector:
     app: phone-validator-backend
-
