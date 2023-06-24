@@ -19,7 +19,7 @@ spec:
         app: phone-validator-backend
     spec:
       containers:
-      - image: johnylima/phone-validator-backend
+      - image: johnylima/phone-validator-backend:3
         name: phone-validator-backend
         resources:
           requests:
