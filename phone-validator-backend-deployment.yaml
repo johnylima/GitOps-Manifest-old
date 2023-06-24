@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: phone-validator-backend
-  namespace: phone-validator-backend
   creationTimestamp: null
   labels:
     app: phone-validator-backend
@@ -30,9 +29,9 @@ spec:
             cpu: 250m
             memory: 256Mi
         ports:
-        - containerPort: 6379
-        env:
-        - name: phone-validator
+            - name: frontend-port
+              containerPort: 8080
+              hostPort: 8080
 
 status: {}
 ---
@@ -45,7 +44,8 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 6379
+  - port: 80
+    targetPort: 8080
   selector:
     app: phone-validator-backend
 
