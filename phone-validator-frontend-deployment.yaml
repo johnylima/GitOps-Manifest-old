@@ -20,7 +20,7 @@ spec:
         app: phone-validator-frontend
     spec:
       containers:
-      - image: johnylima/phone-validator-frontend-2:5
+      - image: johnylima/phone-validator-frontend:12
         name: phone-validator-frontend
         resources:
           requests:
@@ -45,7 +45,13 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 80
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8081
+  - name: https
+    port: 443
+    protocol: TCP
     targetPort: 8081
   selector:
     app: phone-validator-frontend
